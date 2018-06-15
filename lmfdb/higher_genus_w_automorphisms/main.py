@@ -604,7 +604,7 @@ def render_passport(args):
             numgenvecs = int(numgenvecs)
         except:
             numgenvecs = 20
-        info['numgenvecs']=numgenvecs
+               ['numgenvecs']=numgenvecs
 
         title = 'One Refined Passport of Genus ' + str(g) + ' with Automorphism Group $' + pretty_group +'$'
         smallgroup="[" + str(gn) + "," +str(gt) +"]"
