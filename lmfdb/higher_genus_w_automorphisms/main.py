@@ -548,7 +548,7 @@ def render_family(args):
     if 'label' in args:
         label = clean_input(args['label'])
         C = base.getDBConnection()
-        dataz = C.curve_automorphisms.passports.find({'label': label})#.sort('cc.0', pymongo.ASCENDING)
+        dataz = C.curve_automorphisms.passports.find({'label': label})
         
         if dataz.count() is 0:
             flash_error( "No family with label %s was found in the database.", label)
@@ -603,7 +603,12 @@ def render_family(args):
                 if dat['topological'] == dat['cc']:
                     x1=[] #A list of permutations of generating vectors of topo_rep
                     for perm in dat['gen_vectors']:
-                        x1.append(sep.join(split_perm(Permutation(perm).cycle_string())))
+                        display_perm = sep.join(split_perm(Permutation(perm).cycle_string()))
+                        if display_perm == '()':
+                            x1.append('id(G)')
+                        else:
+                            x1.append(display_perm)
+                            
                     Ltopo_rep.append([dat['total_label'], x1, dat['label'],
                                               'T.' + '.'.join(str(x) for x in dat['cc']), dat['cc']]) #2nd to last element is used for webpage tag  
 
@@ -656,7 +661,7 @@ def render_passport(args):
     info = {}
     if 'passport_label' in args:
         label =clean_input(args['passport_label'])
-        C = base.getDBConnection()
+        C = MongoClient(port=int(27017))
         dataz = C.curve_automorphisms.passports.find({'passport_label': label}).sort('cc.1', ASC)
 
         if dataz.count() is 0:
@@ -733,9 +738,11 @@ def render_passport(args):
 
             x4=[]
             for perm in dat['gen_vectors']:
-                cycperm=Permutation(perm).cycle_string()
-
-                x4.append(sep.join(split_perm(cycperm)))
+                display_perm = sep.join(split_perm(Permutation(perm).cycle_string()))
+                if display_perm == '()':
+                    x4.append('id(G)')
+                else:
+                    x4.append(display_perm)
 
             Ldata.append([x1,x2,x3,x4])
 
@@ -749,7 +756,11 @@ def render_passport(args):
             for dat in braid_data:
                 x5=[]
                 for perm in dat['gen_vectors']:
-                    x5.append(sep.join(split_perm(Permutation(perm).cycle_string())))
+                    display_perm = sep.join(split_perm(Permutation(perm).cycle_string()))
+                    if display_perm == '()':
+                        x5.append('id(G)')
+                    else:
+                        x5.append(display_perm)
                 Lbraid.append([dat['total_label'], x5])
 
         braid_length = len(Lbraid)
