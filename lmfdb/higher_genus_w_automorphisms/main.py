@@ -241,8 +241,7 @@ def topological_action(fam, cc):
     sorted_braid = []
     braid_key = Lbraid.keys()
     key_for_sorted = list(map(lambda key: ast.literal_eval(key), braid_key))
-    key_for_sorted.sort()
-    print key_for_sorted 
+    key_for_sorted.sort() 
 
     for key in key_for_sorted:
         sorted_braid.append(Lbraid[str(key)])
@@ -611,7 +610,7 @@ def render_family(args):
                         for perm in dat['gen_vectors']:
                             display_perm = sep.join(split_perm(Permutation(perm).cycle_string()))
                             if display_perm == '()':
-                                x1.append('id(G)')
+                                x1.append('Id(G)')
                             else:
                                 x1.append(display_perm)
                             
@@ -751,7 +750,7 @@ def render_passport(args):
                 for perm in dat['gen_vectors']:
                     display_perm = sep.join(split_perm(Permutation(perm).cycle_string()))
                     if display_perm == '()':
-                        x4.append('id(G)')
+                        x4.append('Id(G)')
                     else:
                         x4.append(display_perm)
 
@@ -774,7 +773,7 @@ def render_passport(args):
                     for perm in dat['gen_vectors']:
                         display_perm = sep.join(split_perm(Permutation(perm).cycle_string()))
                         if display_perm == '()':
-                            x5.append('id(G)')
+                            x5.append('Id(G)')
                         else:
                             x5.append(display_perm)
                 Lbraid.append([dat['total_label'], x5])
