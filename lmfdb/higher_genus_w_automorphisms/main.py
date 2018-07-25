@@ -546,7 +546,7 @@ def render_family(args):
     info = {}
     if 'label' in args:
         label = clean_input(args['label'])
-        C = base.getDBConnection()
+        C = MongoClient(port=int(27017))
         dataz = C.curve_automorphisms.passports.find({'label': label})
         
         if dataz.count() is 0:
@@ -666,13 +666,14 @@ def render_passport(args):
     info = {}
     if 'passport_label' in args:
         label =clean_input(args['passport_label'])
-        C = base.getDBConnection()
+        C =  MongoClient(port=int(27017))
         dataz = C.curve_automorphisms.passports.find({'passport_label': label}).sort('cc.1', ASC)
 
         if dataz.count() is 0:
             bread = get_bread([("Search Error", url_for('.index'))])
             flash_error( "No refined passport with label %s was found in the database.", label)
             return redirect(url_for(".index"))
+        
         data=dataz[0]
         g = data['genus']
         GG = ast.literal_eval(data['group'])
@@ -709,7 +710,6 @@ def render_passport(args):
             ('Generating Vectors','\(%d\)' % numb)
         ]
         info.update({'genus': data['genus'],
-                    'cc': cc_display(data['con']),
                     'sign': sign_display(ast.literal_eval(data['signature'])),
                      'group': pretty_group,
                      'gpid': smallgroup,
@@ -717,6 +717,9 @@ def render_passport(args):
                      'disp_numb':min(numb,numgenvecs),
                      'g0': data['g0']
                    })
+
+        if data['con'] != '[]':
+            info.update({'passport_cc': cc_display(ast.literal_eval(data['con']))})
 
         if spname:
             info.update({'specialname': True})
@@ -757,8 +760,6 @@ def render_passport(args):
             Ldata.append([x1,x2,x3,x4])
 
         info.update({'genvects': Ldata, 'HypColumn' : HypColumn})
-
-        info.update({'passport_cc': cc_display(ast.literal_eval(data['con']))})
         
         #Generate braid representatives
         if 'braid' in dataz[0]:

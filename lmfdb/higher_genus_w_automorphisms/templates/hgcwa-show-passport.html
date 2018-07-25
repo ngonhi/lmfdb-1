@@ -1,7 +1,5 @@
 {% extends "homepage.html" %}
 
-<!-- in templates -->
-
 {% block content %}
 
 <style>
@@ -21,8 +19,13 @@ table,td {
    {% endif %}
   <tr><td>{{KNOWL('curve.highergenus.aut.groupnotation',title='Group identifier')}}:</td> <td>{{info.gpid}}</td></tr>
   <tr><td>{{KNOWL('curve.highergenus.aut.signature', title='Signature')}}:</td> <td>${{info.sign}}$</td></tr>
-  <tr><td>{{KNOWL('curve.highergenus.aut.conjugacyclasses', title="Conjugacy classes")}} for this {{KNOWL('curve.highergenus.aut.refinedpassport',title='refined passport')}}: </td><td>{{info.passport_cc}}</td></tr>
-  </table></p>
+</table>
+
+  {% if info.passport_cc %}
+  <table>
+    <tr><td>{{KNOWL('curve.highergenus.aut.conjugacyclasses', title="Conjugacy classes")}} for this {{KNOWL('curve.highergenus.aut.refinedpassport',title='refined passport')}}: </td><td>{{info.passport_cc}}</td></tr>
+  </table> {% endif %}
+</p>
 
 
 <p>  {% if info.fullauto  %}
