@@ -67,11 +67,14 @@ def tfTOyn(bool):
 
 def sign_display(L):
     sizeL = len(L)
-    signL = "[ " + str(L[0]) + "; "
-    for i in range(1,sizeL-1):
-        signL= signL + str(L[i]) + ", "
+    if sizeL == 1:
+        signL = "[ " + str(L[0]) + "; -]"
+    else:    
+        signL = "[ " + str(L[0]) + "; "
+        for i in range(1,sizeL-1):
+            signL= signL + str(L[i]) + ", "
 
-    signL=signL + str(L[sizeL-1]) + " ]"
+        signL=signL + str(L[sizeL-1]) + " ]"
     return signL
 
 def cc_display(L):
@@ -717,7 +720,9 @@ def render_passport(args):
                      'disp_numb':min(numb,numgenvecs),
                      'g0': data['g0']
                    })
-
+        print data
+        print sign_display(ast.literal_eval(data['signature']))
+        
         if data['con'] != '[]':
             info.update({'passport_cc': cc_display(ast.literal_eval(data['con']))})
 
