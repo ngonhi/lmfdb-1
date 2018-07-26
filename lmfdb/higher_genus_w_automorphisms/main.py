@@ -659,11 +659,7 @@ def render_passport(args):
 
             Ldata.append([x1,x2,x3,x4])
 
-
-
         info.update({'genvects': Ldata, 'HypColumn' : HypColumn})
-
-        info.update({'passport_cc': cc_display(ast.literal_eval(data['con']))})
 
         if 'eqn' in data:
             info.update({'eqns': data['eqn']})
@@ -947,10 +943,3 @@ def hgcwa_code_download_search(res,download_type):
     strIO.write(code)
     strIO.seek(0)
     return send_file(strIO, attachment_filename=filename, as_attachment=True, add_etags=False)
-<<<<<<< HEAD
-=======
-
-
-
-
->>>>>>> 734f024f8f07e0f7a2fbfd79473479f7f0ecb2f1
