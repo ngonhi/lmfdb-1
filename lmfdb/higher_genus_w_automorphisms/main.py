@@ -529,13 +529,22 @@ def render_family(args):
         Lcc=[]
         Lall=[]
         i=1
-        for dat in dataz:
-            if ast.literal_eval(dat['con']) not in Lcc:
-                urlstrng=dat['passport_label']
-                Lcc.append(ast.literal_eval(dat['con']))
-                Lall.append([cc_display(ast.literal_eval(dat['con'])),dat['passport_label'],
-                             urlstrng])
-                i=i+1
+
+        if data['r'] == 0: #If no branch points, no conjugacy class
+            for dat in dataz:
+                if ast.literal_eval(dat['con']) not in Lcc:
+                    urlstrng=dat['passport_label']
+                    Lcc.append(ast.literal_eval(dat['con']))
+                    Lall.append([dat['passport_label'], urlstrng])
+                    i=i+1
+        elif data['r'] > 0:
+            for dat in dataz:
+                if ast.literal_eval(dat['con']) not in Lcc:
+                    urlstrng=dat['passport_label']
+                    Lcc.append(ast.literal_eval(dat['con']))
+                    Lall.append([cc_display(ast.literal_eval(dat['con'])),dat['passport_label'],
+                                             urlstrng])
+                    i=i+1
 
         info.update({'passport': Lall})
 
@@ -618,7 +627,8 @@ def render_passport(args):
                      'disp_numb':min(numb,numgenvecs),
                      'g0': data['g0']
                    })
-        
+
+        # If no branch point, no conjugacy class
         if data['con'] != '[]':
             info.update({'passport_cc': cc_display(ast.literal_eval(data['con']))})
 
