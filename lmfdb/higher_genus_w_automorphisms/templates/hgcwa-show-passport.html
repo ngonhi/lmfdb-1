@@ -82,13 +82,37 @@ The full automorphism group for this family is ${{info.fullauto}}$ with signatur
   {% endif %}
 </p>
 
- <p>{% for cdata in info.genvects %}
-   {{cdata[0]}}
-     <table>{% for perm in cdata[3] %}
-	  <tr><td> &nbsp; </td><td>{{perm}}</td></tr>
-	  {% endfor %} </table> <br>
-  {% endfor %}
- </p>
+{% if info.g0 > 0%}
+<p><table cellpadding=10 class="ntdata">
+    <col width="300">
+    <col width="280">
+    <tr>
+      <th> Hyperbolic Generating Vectors </th>
+      <th> Elliptic Generating Vectors </th>
+    </tr>
+    <tr>
+      {% for cdata in info.genvects %}<table class="ntdata">
+        <col width="300">
+        <col width="280">
+        <tr> 
+          &nbsp; {{cdata[0]}}
+        </tr>
+        <tr>
+          <td>{% for i in range (0, info.g0 * 2) %}
+            {{cdata[3][i]}}<br>
+            {% endfor %}</td>
+          <td>{% for i in range (info.g0 * 2, cdata | length) %}
+	    {{cdata[3][i]}}<br>
+            {% endfor %}</td>
+        </tr>  <br>
+      </table> {% endfor %}</tr>
+  </table>
+</p>
+
+{% else %}
+
+
+{% endif %}
 
  <p>
   {% if info.numb >= 2 %}
