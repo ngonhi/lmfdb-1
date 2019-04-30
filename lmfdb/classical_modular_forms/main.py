@@ -1033,7 +1033,7 @@ def space_search(info, query):
 @cmf.route("/Completeness")
 def completeness_page():
     t = 'Completeness of Classical Modular Form Data'
-    return render_template("single.html", kid='dq.cmf.extent',
+    return render_template("single.html", kid='rcs.cande.cmf',
                            credit=credit(), title=t,
                            bread=get_bread(other='Completeness'),
                            learnmore=learnmore_list_remove('Completeness'))
@@ -1042,7 +1042,7 @@ def completeness_page():
 @cmf.route("/Source")
 def how_computed_page():
     t = 'Source of Classical Modular Form Data'
-    return render_template("single.html", kid='dq.cmf.source',
+    return render_template("single.html", kid='rcs.source.cmf',
                            credit=credit(), title=t,
                            bread=get_bread(other='Source'),
                            learnmore=learnmore_list_remove('Source'))
@@ -1058,7 +1058,7 @@ def labels_page():
 @cmf.route("/Reliability")
 def reliability_page():
     t = 'Reliability of Classical Modular Form Data'
-    return render_template("single.html", kid='dq.cmf.reliability',
+    return render_template("single.html", kid='rcs.rigor.cmf',
                            credit=credit(), title=t,
                            bread=get_bread(other='Reliability'),
                            learnmore=learnmore_list_remove('Reliability'))
@@ -1154,7 +1154,7 @@ class CMF_stats(StatsDisplay):
               'char_degree': 'character.dirichlet.degree',
               'analytic_rank': 'cmf.analytic_rank',
               'projective_image': 'cmf.projective_image',
-              'num_forms': 'cmf.galois-orbits',
+              'num_forms': 'cmf.galois_orbit',
               'inner_twist_count': 'cmf.inner_twist',
               'self_twist_type': 'cmf.self_twist',
               'cm_discs': 'cmf.cm_form',
@@ -1204,7 +1204,7 @@ class CMF_stats(StatsDisplay):
                       ('for weight 1 forms', None)]},
         {'cols':'num_forms',
          'table':db.mf_newspaces,
-         'top_title': [('number of newforms', 'cmf.galois-orbits'), (r'in \(S_k(N, \chi)\)', None)],
+         'top_title': [('number of newforms', 'cmf.galois_orbit'), (r'in \(S_k(N, \chi)\)', None)],
          'url_extras': 'search_type=Spaces&'},
         {'cols':'inner_twist_count'},
         {'cols':['self_twist_type', 'weight'],
