@@ -16,8 +16,6 @@ top_matter:
   magma:  RecFormat:=recformat<group,gp_id, signature,gen_vectors,conj_classes,genus,dimension,r,g0, passport_label,gen_vect_label, is_hyperelliptic, hyp_involution, is_cyclic_trigonal,cyc_auto,full_auto, full_sign>;
 
 
-
-
 gp_comment:
   gap:  " Generate data which is the same for all entries."
   magma: " Create group as a permutation group, and generate data which is the same for all entries."
@@ -181,10 +179,4 @@ search_result_gp_comment:
   gap:  " Create group and signature information."
   magma: " Create group as a permutation group and initialize signature information."
 
-
-
-
-search_result_gp_comment:
-  gap:  " Create group and signature information."
-  magma: " Create group as a permutation group and initialize signature information."
 
